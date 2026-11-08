@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2E3A20">
+<title>Magnus – naročila</title>
+<style>
+:root{--o:#2E3A20;--o2:#4A5D32;--w:#C79F72;--wd:#8C6239;--bg:#F2E8D9;--ln:#E4D8C4;--ink:#26261E;--mut:#7B7566;--sh:0 1px 2px #2e3a2014,0 6px 18px #2e3a2012}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.35 "Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;touch-action:manipulation;padding-bottom:env(safe-area-inset-bottom)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:3px solid var(--wd);outline-offset:2px}
+header{position:sticky;top:0;z-index:20;background:var(--o);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px}
+.hi{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.brand{flex:1;display:flex;flex-direction:column;line-height:1.05}
+.brand b{font-size:1.45rem;font-weight:800;letter-spacing:-.02em}
+.brand small{color:var(--w);font-weight:600;font-size:.78rem;margin-top:2px}
+.nav{display:flex;background:#ffffff1a;border-radius:99px;padding:3px}
+.nav button{padding:8px 16px;border-radius:99px;font-weight:650;color:#ffffffcc}
+.nav button.on{background:#fff;color:var(--o)}
+.back{width:40px;height:40px;border-radius:50%;background:#ffffff1f;color:#fff;font-size:1.7rem;line-height:1;display:grid;place-items:center;padding-bottom:3px}
+.tt{display:flex;flex-direction:column;line-height:1.1}
+.tt b{font-size:1.3rem;font-weight:750}.tt small{color:var(--w);font-weight:600}
+main{max-width:1040px;margin:0 auto;padding:16px}
+h1.pg{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin:6px 0 14px}
+/* prostori */
+.zs{display:grid;gap:12px;max-width:560px;margin:0 auto}
+.zc{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:20px;box-shadow:var(--sh);text-align:left;transition:transform .12s}
+.zc:active{transform:scale(.98)}
+.zc .nb{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--bg);color:var(--wd);font-weight:800;font-size:1.4rem}
+.zc.bz .nb{background:var(--o);color:#fff}
+.zc .tx{flex:1;display:flex;flex-direction:column}
+.zc .tx b{font-size:1.35rem;font-weight:750;letter-spacing:-.01em}
+.zc .tx small{color:var(--mut);font-weight:600}
+.zc .ar{font-size:1.6rem;color:var(--w)}
+/* tloris */
+.one{max-width:640px;margin:4px auto 0;background:#fff;border-radius:22px;padding:18px;box-shadow:var(--sh)}
+.plan{position:relative;width:100%;container-type:inline-size}
+@media(max-width:899px){.plan.fl{aspect-ratio:auto!important;height:260px}}
+.plan svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.plan polygon{fill:#C79F7226;stroke:var(--w);stroke-width:3;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.pt{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;background:#fff;border:2.5px solid var(--wd);border-radius:8px;box-shadow:0 2px 0 #8c623933;transition:transform .12s;overflow:hidden}
+.pt:active{transform:scale(.94)}
+.pt b{font-size:max(16px,5cqw);font-weight:800}
+.pt small{font-weight:700;font-size:max(9px,2.5cqw);color:#fff}
+.pt.busy{background:var(--o);border-color:var(--o);color:#fff}
+.leg{display:flex;gap:16px;justify-content:center;margin-top:14px;color:var(--mut);font-size:.85rem;font-weight:600}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-1px;margin-right:5px;border:2px solid var(--wd);background:#fff}
+.leg i.b{background:var(--o);border-color:var(--o)}
+.row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.row h1{flex:1;margin:0;font-size:1.3rem;font-weight:800}
+.ghost{background:#fff;border-radius:99px;padding:9px 16px;font-weight:650;box-shadow:var(--sh)}
+/* naročilo */
+.ord{display:block}
+@media(min-width:900px){.ord{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}}
+.sb{background:#fff;border-radius:99px;display:flex;align-items:center;padding:0 16px;box-shadow:var(--sh);margin-bottom:12px}
+.sb input{flex:1;border:0;background:none;padding:13px 0;min-width:0;outline:0}
+.sb:focus-within{box-shadow:0 0 0 3px var(--wd)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.chip{flex:none;display:flex;align-items:center;gap:7px;background:#fff;border-radius:99px;padding:8px 14px;font-weight:650;font-size:.92rem;box-shadow:var(--sh)}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--c,var(--o))}
+.chip.on{background:var(--c,var(--o));color:#fff}.chip.on i{background:#fff}
+.sec{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.05rem;letter-spacing:-.01em;margin:18px 0 8px}
+.sec i{width:12px;height:12px;border-radius:4px;background:var(--c)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
+.it{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-height:92px;text-align:left;background:#fff;border-radius:14px;padding:12px 12px 10px 17px;box-shadow:var(--sh);transition:transform .1s}
+.it::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.it:active{transform:scale(.96)}
+.it .nm{font-weight:650;line-height:1.2;padding-right:22px}
+.it .sz{display:inline-block;margin-top:5px;font-size:.74rem;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 13%,#fff);padding:2px 8px;border-radius:99px}
+.it .pr{font-weight:750;font-variant-numeric:tabular-nums}
+.it .q{position:absolute;top:8px;right:8px;min-width:24px;height:24px;border-radius:12px;padding:0 6px;background:var(--o);color:#fff;font-weight:750;font-size:.82rem;display:grid;place-items:center}
+.cart{position:fixed;left:0;right:0;bottom:0;z-index:15;background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -8px 30px #2e3a2030;padding-bottom:env(safe-area-inset-bottom)}
+@media(min-width:900px){.cart{position:sticky;top:84px;bottom:auto;border-radius:22px;box-shadow:var(--sh);overflow:hidden}}
+.cb{width:100%;display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--o);color:#fff;border-radius:22px 22px 0 0;font-weight:700}
+.cb .cc{background:var(--w);color:var(--o);min-width:28px;height:28px;border-radius:14px;display:grid;place-items:center;font-size:.9rem;padding:0 7px}
+.cb .cn{flex:1;text-align:left}
+.cb .ct{font-size:1.2rem;font-variant-numeric:tabular-nums}
+.cb .chev{opacity:.7;font-size:.8rem}
+@media(min-width:900px){.cb{pointer-events:none;border-radius:0}.cb .chev{display:none}}
+.cl{max-height:46vh;overflow:auto;padding:4px 16px}
+@media(min-width:900px){.cl{max-height:55vh}}
+.cart:not(.open) .cl,.cart:not(.open) .ca{display:none}
+@media(min-width:900px){.cart:not(.open) .cl,.cart:not(.open) .ca{display:block}.cart:not(.open) .ca{display:flex}}
+.ln{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--ln)}
+.ln:last-child{border:0}
+.ln .nm{flex:1;font-weight:600;line-height:1.2}.ln .nm small{display:block;color:var(--mut);font-weight:500}
+.st{display:flex;align-items:center;background:var(--bg);border-radius:99px}
+.st button{width:34px;height:34px;font-size:1.2rem;font-weight:700;color:var(--o)}
+.st b{min-width:20px;text-align:center}
+.ln .pr{min-width:62px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.ca{display:flex;gap:10px;padding:12px 16px 14px}
+.ca button{flex:1;padding:13px;border-radius:12px;font-weight:700}
+.no{background:#fff;box-shadow:inset 0 0 0 2px #b3432f55;color:#b3432f}
+.ok{background:var(--o2);color:#fff}
+.em{text-align:center;color:var(--mut);padding:26px 10px}
+/* zgodovina */
+.stat{background:var(--o);color:#fff;border-radius:20px;padding:20px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:flex-end}
+.stat small{color:var(--w);font-weight:650;display:block}
+.stat b{font-size:2.1rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hs{display:flex;gap:14px;background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
+.hs .tb{width:46px;height:46px;border-radius:12px;background:var(--bg);color:var(--wd);display:grid;place-items:center;font-weight:800;font-size:1.15rem;flex:none}
+.hs .bd{flex:1;min-width:0}
+.hs .hd{display:flex;justify-content:space-between;font-weight:750}
+.hs small{color:var(--mut);display:block;margin-top:3px}
+.tools{margin-top:18px;display:flex;justify-content:center}
+dialog{border:0;border-radius:22px;padding:22px;width:min(88vw,380px);background:#fff;box-shadow:0 20px 60px #0005}
+dialog::backdrop{background:#2e3a2088}
+dialog p{margin:0 0 18px;font-size:1.1rem;font-weight:650;line-height:1.3}
+.dr{display:flex;gap:10px}.dr button{flex:1;padding:13px;border-radius:12px;font-weight:700;background:var(--bg)}
+#toast{position:fixed;top:78px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;z-index:40;display:none;font-weight:600;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="hi" id="hd"></div></header>
+<main id="app"></main>
+<div id="toast"></div>
+<dialog id="cf"><p id="cm"></p><div class="dr"><button type="button" id="cn">Ne</button><button type="button" id="cy" class="ok">Da</button></div></dialog>
+
+<script>
+// ---------- Cenik (iz Excela, veljaven od 04.11.2026) – spreminjaš ga samo v tej datoteki ----------
+const D=[
+["Kave","#7A5230",[["Espresso","",1.5],["Kava z mlekom","",1.8],["Cappuccino","",1.9],["Bela kava","",2.3],["Macchiato","",1.6],["Kava s smetano","",1.8],["Latte macchiato","",2.5],["Ledena kava","",5],["Irska kava","",4]]],
+["Dodatki","#A39B78",[["Ovsen napitek","",0.4],["Mleko","",0.5],["Kokosov napitek","",0.6],["Smetana","",0.4],["Med","",0.5],["Limona","",0.3],["Penice","",0.2],["Monin","",0.2],["Brezkofeinska","",0.4]]],
+["Prigrizki","#5E9E6E",[["Rogljiček","",1.9]]],
+["Topli napitki","#C2573C",[["Čaj Dammann","",2.5],["Matcha","",3.5],["Matcha jagoda","",4.5],["Kakav","",2.6],["Kakav z medom","",3],["Vroča čokolada","",3.5],["Posebna vroča čokolada","",4.2],["Babyccino","",1],["Chai latte","",3.3],["Pistachio latte","",3.8],["Latte s slano karamelo","",3.5],["Kuhano vino","",4],["Kuhan gin","",6],["Bombardino","",5],["Topla limonada","",3.5]]],
+["Brezalkoholno","#2F9AA6",[["Hišna limonada","0,5 L",3.4],["Hišni ledeni čaj","0,5 L",3.4],["Naravna limonada","0,5 L",2.8],["Naravni pomarančni sok","0,1 L",2.1],["Cedevita","0,5 L",2.6],["Coca-Cola","0,25 L",2.7],["Schweppes","0,25 L",2.7],["Fanta","0,25 L",2.7],["Cockta","0,27 L",2.7],["Pink tonic","",2.8],["Fructal steklenička","0,2 L",2.4],["Sok","0,1 L",1.2],["Sok","1 L",6],["Radenska Classic","0,25 L",2.2],["Radenska Classic","0,1 L",0.5],["Radenska Classic","1 L",5],["Radenska Okus","0,25 L",2.3]]],
+["Pivo v steklenici","#D9A21B",[["Laško","0,5 L",2.9],["Laško","0,33 L",2.7],["Union","0,5 L",2.9],["Union","0,33 L",2.7],["Heineken","0,33 L",3],["Radler","0,5 L",2.8],["Isotonic","0,5 L",2.8],["Malt","0,33 L",2.6]]],
+["Točeno pivo","#B5651D",[["Točeno Laško","0,5 L",3],["Točeno Laško malo","0,3 L",null],["Union IPA","0,5 L",3.5],["Union IPA malo","0,3 L",3]]],
+["Rdeča vina","#8E1F3A",[["Steyer Mark Cuvée","0,1 L",4.5],["Albiana Modra Frankinja","0,1 L",3.5],["Santomas Syrah","0,1 L",3.5],["Cabernet sauvignon","0,1 L",2.5]]],
+["Bela vina","#9DAA2E",[["Hišno Steyer","0,1 L",1.5],["Steyer Mark Cuvée","0,1 L",4.5],["Steyer Sauvignon","0,1 L",3.5],["Erzetič Sivi pinot","0,1 L",3],["Santomas Malvazija","0,1 L",3.5],["Janževec","0,1 L",1.5]]],
+["Rosé","#D97A93",[["Erzetič Rosé","0,1 L",3.5]]],
+["Sladka vina","#C9A227",[["Pravino Rumeni muškat","0,1 L",3.5],["Steyer Desetni traminec","0,1 L",3]]],
+["Spritz","#E8782B",[["Aperol Spritz","",5],["Hugo Spritz Classic","",5],["Hugo Spritz Okus","",5.2]]],
+["Gin","#4F7CAC",[["Haymans Peach-Rose","0,03 L",4.5],["Haymans Sloe Gin","0,03 L",4.2],["Haymans London Dry Gin","0,03 L",3.8]]],
+["Gin tonic","#1F6F6F",[["Gin Tonic Classic","",5],["Sunny Collins","",6],["Peach-Rose Tonic","",6],["Cherry Lime Tonic","",6]]],
+["Koktejli","#B03A8C",[["Pornstar Martini","",6.5],["Tequila Sunrise","",6.5],["Piña Colada","",6.5],["Malibu Sunset","",6.5],["Safe Harbour","",6.5],["Mojito Classic","",6.5],["Mojito Okus","",6.5],["Brezalkoholni","",4.5]]],
+["Grenčice in likerji","#7B4B7A",[["Jägermeister","0,03 L",2.8],["Antique pelinkovec","0,03 L",2.8],["Baileys","0,03 L",2.8],["Shanky's Whip","0,03 L",2.8],["Mandljeva tequila","0,03 L",2.8],["Orehovec","0,03 L",2.8],["Borovničke","0,03 L",2.8],["Smreka","0,03 L",3]]],
+["Žganja","#6E7F7A",[["Viljamovka","0,03 L",3.2],["Travarica","0,03 L",2.8],["Borovničke","0,03 L",2.8],["Tequila","0,03 L",2.8],["Vodka","0,03 L",2.5]]],
+["Rum","#5A3A22",[["Diplomático","0,03 L",4],["Zacapa","0,03 L",6.5],["La Hechicera","0,03 L",5.5],["Bush Rum Pasionka","0,03 L",3.5]]],
+["Whiskey","#A0522D",[["Jameson","0,03 L",2.9],["Jameson Black Barrel","0,03 L",3.9],["Jack Daniel's","0,03 L",2.9],["Four Roses","0,03 L",3.5],["Nikka Whisky","0,03 L",6.5]]]
+];
+const CATS=D.map(([n,c])=>({n,c}));
+const ITEMS=D.flatMap(([c,col,a])=>a.map(([n,s,p])=>({id:c+"|"+n+"|"+s,c,n,s,p})));
+const colOf=c=>CATS.find(x=>x.n===c).c;
+
+// Tloris: koordinate so iz slike (b = okvir prostora, t = mize [x1,y1,x2,y2])
+const PLAN=[
+{id:"t1",n:"Terasa 1",b:[630,57,1127,222],fl:1,t:{6:[655,73,731,129],7:[780,73,856,129],8:[906,72,982,128],9:[1025,70,1100,127],10:[809,158,885,214],11:[986,156,1062,212]}},
+{id:"n",n:"Notri",b:[545,255,998,650],t:{1:[566,560,670,643],2:[566,423,670,507],3:[566,291,670,376],4:[845,298,940,489],5:[848,558,950,642]}},
+{id:"t2",n:"Terasa 2",b:[33,245,490,578],poly:"0,0 100,0 100,100 1,65",t:{12:[396,432,472,508],13:[396,280,472,360],14:[247,443,333,517],15:[243,313,325,395],16:[65,386,154,461],17:[56,260,148,337]}}
+];
+const ORDER=["Notri","Terasa 1","Terasa 2"].map(n=>PLAN.find(p=>p.n===n));
+const zoneOf=t=>PLAN.find(z=>String(t) in z.t);
+
+// ---------- Stanje (odprta naročila in zgodovina; shranjeno v brskalniku te naprave) ----------
+const K="magnus_v1";
+let S={open:{},hist:[]};
+try{const j=JSON.parse(localStorage.getItem(K));if(j){S.open=j.open||{};S.hist=j.hist||[]}}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast("Shranjevanje v brskalnik ni uspelo")}};
+const V={v:"tables",zone:"",table:null,cat:null,q:"",cart:false};
+
+// ---------- Pomočniki ----------
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const eur=n=>n==null?"–":n.toFixed(2).replace(".",",")+" €";
+const lines=t=>S.open[t]||[];
+const total=l=>l.reduce((a,x)=>a+x.p*x.q,0);
+const cnt=l=>l.reduce((a,x)=>a+x.q,0);
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.style.display="block";clearTimeout(tt);tt=setTimeout(()=>t.style.display="none",2200)}
+function ask(m,fn){const d=$("#cf");$("#cm").textContent=m;$("#cy").onclick=()=>{d.close();fn()};$("#cn").onclick=()=>d.close();d.showModal()}
+
+// ---------- Izris ----------
+function header(){
+  const h=$("#hd");
+  if(V.v==="order"){h.innerHTML=`<button class="back" data-a="v" data-v="tables" aria-label="Nazaj">‹</button><div class="tt"><b>Miza ${V.table}</b><small>${zoneOf(V.table).n}</small></div>`;return}
+  const b=(v,t)=>`<button data-a="v" data-v="${v}" class="${V.v===v?"on":""}">${t}</button>`;
+  h.innerHTML=`<div class="brand"><b>Magnus</b><small>Kavarna · naročila</small></div><nav class="nav">${b("tables","Mize")}${b("hist","Zgodovina")}</nav>`;
+}
+function render(){
+  header();
+  const m=$("#app");
+  document.body.style.paddingBottom=V.v==="order"?"96px":"0";
+  if(V.v==="tables"&&!V.zone){
+    m.innerHTML=`<h1 class="pg">Izberi prostor</h1><div class="zs">`+ORDER.map(z=>{
+      const ids=Object.keys(z.t),open=ids.filter(n=>lines(n).length).length;
+      return `<button class="zc ${open?"bz":""}" data-a="zone" data-z="${z.n}"><span class="nb">${open||ids.length}</span><span class="tx"><b>${z.n}</b><small>${open?`${open} ${open==1?"zasedena":open==2?"zasedeni":"zasedene"} od ${ids.length} miz`:`${ids.length} miz · vse proste`}</small></span><span class="ar">›</span></button>`;
+    }).join("")+`</div>`;
+  }else if(V.v==="tables"){
+    const z=PLAN.find(p=>p.n===V.zone),[x0,y0,x1,y1]=z.b,w=x1-x0,h=y1-y0;
+    const tb=Object.entries(z.t).map(([n,[a,b,c,d]])=>{
+      const l=lines(n),bz=l.length;
+      return `<button class="pt ${bz?"busy":""}" style="left:${(a-x0)/w*100}%;top:${(b-y0)/h*100}%;width:${(c-a)/w*100}%;height:${(d-b)/h*100}%" data-a="tbl" data-t="${n}" aria-label="Miza ${n}"><b>${n}</b>${bz?`<small>${eur(total(l))}</small>`:""}</button>`;
+    }).join("");
+    m.innerHTML=`<div class="row"><button class="ghost" data-a="zone" data-z="">‹ Prostori</button><h1>${z.n}</h1></div><div class="one"><div class="plan${z.fl?" fl":""}" style="aspect-ratio:${w}/${h}"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="${z.poly||"0,0 100,0 100,100 0,100"}"/></svg>${tb}</div><div class="leg"><span><i></i>prosta</span><span><i class="b"></i>zasedena</span></div></div>`;
+  }else if(V.v==="order"){
+    const ch=`<button class="chip ${V.cat?"":"on"}" data-a="cat" data-c=""><i></i>Vse</button>`+CATS.map(c=>`<button class="chip ${V.cat===c.n?"on":""}" style="--c:${c.c}" data-a="cat" data-c="${esc(c.n)}"><i></i>${esc(c.n)}</button>`).join("");
+    m.innerHTML=`<div class="ord"><div><label class="sb"><input id="q" type="search" placeholder="Išči pijačo ali jed…" value="${esc(V.q)}" autocomplete="off"></label><div class="chips">${ch}</div><div id="grid"></div></div><aside id="cart" class="cart"></aside></div>`;
+    grid();cart();
+  }else{
+    const today=new Date().toDateString(),ts=S.hist.filter(x=>new Date(x.t).toDateString()===today);
+    let h=`<div class="stat"><div><small>Danes zaključeno</small><b>${eur(ts.reduce((a,x)=>a+x.tot,0))}</b></div><div style="text-align:right"><small>Naročil</small><b>${ts.length}</b></div></div>`;
+    h+=S.hist.length?S.hist.map(x=>`<div class="hs"><div class="tb">${x.tb}</div><div class="bd"><div class="hd"><span>Miza ${x.tb}</span><span>${eur(x.tot)}</span></div><small>${new Date(x.t).toLocaleString("sl-SI",{day:"numeric",month:"numeric",hour:"2-digit",minute:"2-digit"})}</small><small>${x.l.map(l=>l.q+"× "+esc(l.n)+(l.s?" "+esc(l.s):"")).join(", ")}</small></div></div>`).join(""):`<div class="em">Še ni zaključenih naročil.</div>`;
+    if(S.hist.length)h+=`<div class="tools"><button class="ghost" data-a="clrh">Izbriši zgodovino</button></div>`;
+    m.innerHTML=h;
+  }
+}
+function grid(){
+  const q=V.q.trim().toLowerCase(),l=lines(V.table);let h="";
+  CATS.forEach(c=>{
+    if(V.cat&&V.cat!==c.n)return;
+    const it=ITEMS.filter(i=>i.c===c.n&&(!q||(i.n+" "+i.s+" "+i.c).toLowerCase().includes(q)));
+    if(!it.length)return;
+    h+=`<div class="sec" style="--c:${c.c}"><i></i>${esc(c.n)}</div><div class="grid">`+it.map(i=>{const x=l.find(z=>z.id===i.id);return `<button class="it" style="--c:${c.c}" data-a="add" data-id="${esc(i.id)}"><div><div class="nm">${esc(i.n)}</div>${i.s?`<span class="sz">${esc(i.s)}</span>`:""}</div><span class="pr">${i.p==null?"ni cene":eur(i.p)}</span>${x?`<span class="q">${x.q}</span>`:""}</button>`}).join("")+`</div>`;
+  });
+  $("#grid").innerHTML=h||`<div class="em">Ni zadetkov.</div>`;
+}
+function cart(){
+  const l=lines(V.table),c=$("#cart");
+  c.className="cart"+(V.cart?" open":"");
+  c.innerHTML=`<button class="cb" data-a="ct"><span class="cc">${cnt(l)}</span><span class="cn">Naročilo</span><span class="ct">${eur(total(l))}</span><span class="chev">${V.cart?"▼":"▲"}</span></button><div class="cl">`+(l.length?l.map(x=>`<div class="ln"><div class="nm">${esc(x.n)}${x.s?`<small>${esc(x.s)}</small>`:""}</div><div class="st"><button data-a="dec" data-id="${esc(x.id)}" aria-label="Manj">−</button><b>${x.q}</b><button data-a="inc" data-id="${esc(x.id)}" aria-label="Več">+</button></div><span class="pr">${eur(x.p*x.q)}</span></div>`).join(""):`<div class="em">Naročilo je prazno.<br>Tapni pijačo, da jo dodaš.</div>`)+`</div>`+(l.length?`<div class="ca"><button class="no" data-a="clr">Prekliči</button><button class="ok" data-a="done">Zaključi · plačano</button></div>`:"");
+}
+
+// ---------- Dejanja ----------
+function setQty(id,d){
+  const l=lines(V.table),x=l.find(z=>z.id===id);if(!x)return;
+  x.q+=d;if(x.q<=0)l.splice(l.indexOf(x),1);
+  if(!l.length)delete S.open[V.table];
+  save();grid();cart();
+}
+const act={
+  v(d){if(d.v==="tables"&&V.v!=="order")V.zone="";V.v=d.v;render();scrollTo(0,0)},
+  zone(d){V.zone=d.z||"";render()},
+  tbl(d){V.table=+d.t;V.v="order";V.cat=null;V.q="";V.cart=false;render();scrollTo(0,0)},
+  cat(d){V.cat=d.c||null;grid();document.querySelectorAll(".chip").forEach(b=>b.classList.toggle("on",(b.dataset.c||null)===V.cat))},
+  add(d){
+    const it=ITEMS.find(i=>i.id===d.id);if(!it)return;
+    const l=S.open[V.table]=lines(V.table),x=l.find(z=>z.id===it.id);
+    if(x)x.q++;else l.push({id:it.id,n:it.n,s:it.s,p:it.p||0,q:1});
+    save();grid();cart();
+  },
+  inc(d){setQty(d.id,1)},
+  dec(d){setQty(d.id,-1)},
+  ct(){V.cart=!V.cart;cart()},
+  clr(){ask("Prekličem naročilo za mizo "+V.table+"?",()=>{delete S.open[V.table];save();V.cart=false;V.v="tables";render()})},
+  done(){const l=lines(V.table);if(l.length)ask(`Zaključim naročilo za mizo ${V.table} (${eur(total(l))})?`,()=>act.fin())},
+  fin(){
+    const l=lines(V.table);if(!l.length)return;
+    S.hist.unshift({t:Date.now(),tb:V.table,l:l.map(({n,s,p,q})=>({n,s,p,q})),tot:total(l)});
+    S.hist=S.hist.slice(0,500);delete S.open[V.table];save();
+    toast("Naročilo zaključeno");V.cart=false;V.v="tables";render();
+  },
+  clrh(){ask("Izbrišem vso zgodovino?",()=>{S.hist=[];save();render()})}
+};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b&&act[b.dataset.a])act[b.dataset.a](b.dataset)});
+document.addEventListener("input",e=>{if(e.target.id==="q"){V.q=e.target.value;grid()}});
+render();
+</script>
+</body>
+</html>
