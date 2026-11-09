@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2E3A20">
 <title>Magnus – naročila</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Magnus">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
 :root{--o:#2E3A20;--o2:#4A5D32;--w:#C79F72;--wd:#8C6239;--bg:#F2E8D9;--ln:#E4D8C4;--ink:#26261E;--mut:#7B7566;--sh:0 1px 2px #2e3a2014,0 6px 18px #2e3a2012}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -258,6 +265,7 @@ const act={
 document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b&&act[b.dataset.a])act[b.dataset.a](b.dataset)});
 document.addEventListener("input",e=>{if(e.target.id==="q"){V.q=e.target.value;grid()}});
 render();
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 </script>
 </body>
 </html>
