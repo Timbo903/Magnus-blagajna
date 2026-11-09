@@ -45,7 +45,7 @@ h1.pg{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin:6px 0 14px}
 /* tloris */
 .one{max-width:640px;margin:4px auto 0;background:#fff;border-radius:22px;padding:18px;box-shadow:var(--sh)}
 .plan{position:relative;width:100%;container-type:inline-size}
-@media(max-width:899px){.plan.fl{aspect-ratio:auto!important;height:260px}}
+@media(max-width:899px){.plan.fl{aspect-ratio:auto!important;height:175px;--e:1.35}}
 .plan svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .plan polygon{fill:#C79F7226;stroke:var(--w);stroke-width:3;vector-effect:non-scaling-stroke;stroke-linejoin:round}
 .pt{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;background:#fff;border:2.5px solid var(--wd);border-radius:8px;box-shadow:0 2px 0 #8c623933;transition:transform .12s;overflow:hidden}
@@ -200,7 +200,7 @@ function render(){
     const z=PLAN.find(p=>p.n===V.zone),[x0,y0,x1,y1]=z.b,w=x1-x0,h=y1-y0;
     const tb=Object.entries(z.t).map(([n,[a,b,c,d]])=>{
       const l=lines(n),bz=l.length;
-      return `<button class="pt ${bz?"busy":""}" style="left:${(a-x0)/w*100}%;top:${(b-y0)/h*100}%;width:${(c-a)/w*100}%;height:${(d-b)/h*100}%" data-a="tbl" data-t="${n}" aria-label="Miza ${n}"><b>${n}</b>${bz?`<small>${eur(total(l))}</small>`:""}</button>`;
+      return `<button class="pt ${bz?"busy":""}" style="left:calc(${(a-x0)/w*100}% - ${(c-a)/w*100}% * (var(--e,1) - 1) / 2);top:${(b-y0)/h*100}%;width:calc(${(c-a)/w*100}% * var(--e,1));aspect-ratio:${c-a}/${d-b}" data-a="tbl" data-t="${n}" aria-label="Miza ${n}"><b>${n}</b>${bz?`<small>${eur(total(l))}</small>`:""}</button>`;
     }).join("");
     m.innerHTML=`<div class="row"><button class="ghost" data-a="zone" data-z="">‹ Prostori</button><h1>${z.n}</h1></div><div class="one"><div class="plan${z.fl?" fl":""}" style="aspect-ratio:${w}/${h}"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="${z.poly||"0,0 100,0 100,100 0,100"}"/></svg>${tb}</div><div class="leg"><span><i></i>prosta</span><span><i class="b"></i>zasedena</span></div></div>`;
   }else if(V.v==="order"){
